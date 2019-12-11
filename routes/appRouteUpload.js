@@ -1,3 +1,4 @@
+const express = require('express')
 const Config = require('../globals/Config');
 const path = require('path');
 const mkdirp = require('mkdirp')
@@ -12,7 +13,11 @@ module.exports = function (app) {
     //################################################ Upload Route ###############################################
     //#############################################################################################################
     //#############################################################################################################
-
+    app.get('/public_file/:_code/:upload_url/:file', function (req, res) {
+        var publicDir = require('path').join(__dirname, '../../public_file/' + req.params._code + '/' + req.params.upload_url + '/' + req.params.file);
+        console.log("publicDir", publicDir);
+        res.download(publicDir);
+    })
 
     app.post('/upload-file', function (req, res) {
         console.log(">>>>", req.body);
