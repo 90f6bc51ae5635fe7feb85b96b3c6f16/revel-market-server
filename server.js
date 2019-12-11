@@ -23,5 +23,9 @@ app.use((req, res, next) => {
 });
 
 app.listen(port, () => {
-    console.log('API Start server at port 2001.')
+    console.log('API Start server at port 2001.');
 })
+
+var appRouteUser = require('./routes/appRouteUser');
+
+appRouteUser(app);
