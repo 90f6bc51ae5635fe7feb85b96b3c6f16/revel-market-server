@@ -6,7 +6,7 @@ var connection = mysql.createConnection({
     user: 'root',
     port: 3306, 
     password: 'root123456',
-    database: 'revel-market',
+    database: 'revel-market_db',
     multipleStatements: true
 }); 
 

@@ -10,4 +10,40 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/user/getUserByUserCode', function (req, res) {
+        console.log('/user/getUserByUserCode', req.body)
+        UserController.getUserByUserCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+    app.post('/user/insertUser', function (req, res) {
+        console.log('/user/insertUser', req.body)
+        UserController.insertUser(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+    app.post('/user/updateUserByUserCode', function (req, res) {
+        console.log('/user/updateUserByUserCode', req.body)
+        UserController.updateUserByUserCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+    app.post('/user/deleteUserByUserCode', function (req, res) {
+        console.log('/user/deleteUserByUserCode', req.body)
+        UserController.deleteUserByUserCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
 }
