@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 5001;
 
+var publicDir = require('path').join(__dirname, '../public_images/');
+app.use(express.static(publicDir));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -26,6 +29,8 @@ app.listen(port, () => {
     console.log('API Start server at port ' + port + '.');
 })
 
+var appRouteUpload = require('./routes/appRouteUpload');
 var appRouteUser = require('./routes/appRouteUser');
 
+appRouteUpload(app); //upload the route
 appRouteUser(app);
