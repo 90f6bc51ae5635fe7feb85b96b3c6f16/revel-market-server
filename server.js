@@ -32,7 +32,9 @@ app.listen(port, () => {
 var appRouteUpload = require('./routes/appRouteUpload');
 var appRouteUser = require('./routes/appRouteUser');
 var appRouteShop = require('./routes/appRouteShop');
+var appRouteNews = require('./routes/appRouteNews');
 
 appRouteUpload(app); //upload the route
 appRouteUser(app);
-appRouteShop(app)
+appRouteShop(app);
+appRouteNews(app);
