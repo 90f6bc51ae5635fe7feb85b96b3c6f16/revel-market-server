@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2019 at 03:58 AM
--- Server version: 8.0.17
--- PHP Version: 7.3.8
+-- Generation Time: Dec 12, 2019 at 06:45 AM
+-- Server version: 5.7.17-log
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -34,7 +32,8 @@ CREATE TABLE `tb_news` (
   `news_date` varchar(50) NOT NULL,
   `news_deciption` text NOT NULL,
   `news_detail` text NOT NULL,
-  `news_show` int(1) NOT NULL
+  `news_show` int(1) NOT NULL,
+  `news_image_name` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -62,7 +61,8 @@ CREATE TABLE `tb_shop` (
   `shop_tel` varchar(50) DEFAULT NULL,
   `shop_detail` text,
   `shop_latitude` varchar(50) NOT NULL,
-  `shop_longitude` varchar(50) NOT NULL
+  `shop_longitude` varchar(50) NOT NULL,
+  `shop_image_name` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -128,7 +128,6 @@ ALTER TABLE `tb_shop_image`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`user_code`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

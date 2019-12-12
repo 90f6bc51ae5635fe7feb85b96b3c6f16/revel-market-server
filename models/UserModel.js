@@ -4,9 +4,42 @@ var Task = function (task) {
     this.task = task.task;
 };
 
+
+Task.checkLogin = function checkLogin(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  * FROM `tb_user` WHERE " +
+            +" user_username = " + sql.escape(data.user_username) + ""
+            + "AND user_password = " + sql.escape(data.user_password) + "";
+        sql.query(str, function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+}
+
+
 Task.getUserBy = function getUserBy() {
     return new Promise(function (resolve, reject) {
         var str = "SELECT * FROM tb_user ";
+        console.log("str",str);
+        
         sql.query(str, function (err, res) {
             if (err) {
                 console.log("error: ", err);

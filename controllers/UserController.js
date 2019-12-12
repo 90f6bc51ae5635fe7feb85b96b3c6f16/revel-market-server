@@ -3,6 +3,12 @@ var UserModel = require('../models/UserModel');
 var Task = function (task) {
     this.task = task.task;
 };
+
+
+Task.checkLogin = async function checkLogin(data, result) {
+    var user = await UserModel.checkLogin(data);
+    result(user);
+}
 Task.getUserBy = async function getUserBy(data, result) {
     var userList = await UserModel.getUserBy(data);
     result(userList);
