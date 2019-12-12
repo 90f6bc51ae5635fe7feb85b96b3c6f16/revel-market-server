@@ -34,9 +34,11 @@ var appRouteUser = require('./routes/appRouteUser');
 var appRouteShop = require('./routes/appRouteShop');
 var appRouteShopImage = require('./routes/appRouteShopImage');
 var appRouteNews = require('./routes/appRouteNews');
+var appRouteNewsImage = require('./routes/appRouteNewsImage');
 
 appRouteUpload(app); //upload the route
 appRouteUser(app);
 appRouteShop(app);
 appRouteShopImage(app);
 appRouteNews(app);
+appRouteNewsImage(app);
