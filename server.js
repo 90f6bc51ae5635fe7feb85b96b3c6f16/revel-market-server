@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 5001;
 
-var publicDir = require('path').join(__dirname, '../public_images/');
+var publicDir = require('path').join(__dirname, '/public_images/');
 app.use(express.static(publicDir));
 
 app.use(bodyParser.urlencoded({ extended: true }));

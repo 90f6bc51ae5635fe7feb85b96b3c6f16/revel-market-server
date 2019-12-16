@@ -13,23 +13,23 @@ module.exports = function (app) {
     //################################################ Upload Route ###############################################
     //#############################################################################################################
     //#############################################################################################################
-    app.get('/public_file/:_code/:upload_url/:file', function (req, res) {
-        var publicDir = require('path').join(__dirname, '../../public_file/' + req.params._code + '/' + req.params.upload_url + '/' + req.params.file);
-        console.log("publicDir", publicDir);
-        res.download(publicDir);
-    })
+    // app.get('/public_file/:_code/:upload_url/:file', function (req, res) {
+    //     var publicDir = require('path').join(__dirname, '../../public_file/' + req.params._code + '/' + req.params.upload_url + '/' + req.params.file);
+    //     console.log("publicDir", publicDir);
+    //     res.download(publicDir);
+    // })
 
-    app.post('/upload-file', function (req, res) {
+    app.post('/upload-image', function (req, res) {
         console.log(">>>>", req.body);
         var multer = require('multer');
         var filePathSub = '';
         var Storage = multer.diskStorage({
             destination: function (req, file, callback) {
                 console.log(">>>>>>", req.params);
-                const userPath = _config.getInt2Text(req.body._code) + "/" + req.body.upload_url;
-                const subPath = '../../public_file/' + userPath;
+                const userPath =  req.body.upload_url;
+                const subPath = '../public_images/' + userPath;
                 const filePath = path.join(__dirname, subPath);
-                filePathSub = 'public_file/' + userPath;
+                filePathSub = userPath;
 
                 mkdirp.sync(filePath)
                 callback(null, filePath);
@@ -53,9 +53,9 @@ module.exports = function (app) {
                 };
                 res.send(require);
             } else {
-                const comment_photo_url = _config.getServerUrl() + "/" + filePathSub + "/" + req.file.filename
+                const comment_photo_url =  filePathSub + "/" + req.file.filename
                 const require = {
-                    data: [{ comment_photo_url: comment_photo_url }],
+                    comment_photo_url: comment_photo_url ,
                     error: [{ message: 'Upload photo complete.' }],
                     upload_result: true,
                     server_result: true
@@ -66,10 +66,10 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/delete-file', function (req, res) {
+    app.post('/delete-image', function (req, res) {
         console.log(req.body);
 
-        const filePath = path.join(__dirname, "../../" + req.body.delete_path);
+        const filePath = path.join(__dirname, "../public_images/" + req.body.delete_path);
         console.log(">", filePath);
 
         fs.unlink(filePath, (err) => {

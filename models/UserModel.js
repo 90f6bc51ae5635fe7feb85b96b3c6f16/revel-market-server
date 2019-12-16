@@ -7,9 +7,12 @@ var Task = function (task) {
 
 Task.checkLogin = function checkLogin(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT  * FROM `tb_user` WHERE " +
-            +" user_username = " + sql.escape(data.user_username) + ""
+        var str = "SELECT  * FROM `tb_user`  " 
+            +" WHERE user_username = " + sql.escape(data.user_username) + ""
             + "AND user_password = " + sql.escape(data.user_password) + "";
+
+            console.log("query checkLogin = ",str);
+            
         sql.query(str, function (err, res) {
             if (err) {
                 console.log("error: ", err);
@@ -140,7 +143,7 @@ Task.updateUserByUserCode = function updateUserByUserCode(data) {
             + " user_image = '" + data.user_image + "'"
             + " WHERE user_code = '" + data.user_code + "'";
 
-        console.log("insertUser>>", str);
+        console.log("UpdateUser>>", str);
         sql.query(str, function (err, res) {
             if (err) {
                 console.log("error: ", err);
