@@ -84,15 +84,16 @@ Task.getNewsByNewsCode = function getNewsByNewsCode(data) {
 }
 Task.insertNews = function insertNews(data, last_code) {
     return new Promise(function (resolve, reject) {
-        var str = "INSERT INTO tb_news (news_code, news_title, news_date, news_deciption, news_detail, news_show)"
+        var str = "INSERT INTO tb_news (news_code, news_title, news_date, news_description, news_detail, news_show , news_image_name )"
             + " VALUES ('" + last_code + "', "
             + " '" + data.news_title + "', "
-            + " '" + data.news_date + "', "
-            + " '" + data.news_deciption + "', "
+            + " NOW() , "
+            + " '" + data.news_description + "', "
             + " '" + data.news_detail + "', "
-            + " '" + data.news_show + "') ";
+            + " '" + data.news_show + "' , "
+            + " '" + data.news_image_name + "' ) ";
 
-        console.log("insertNews>>", str);
+        console.log("insertNews>>", data, str);
         sql.query(str, function (err, res) {
             if (err) {
                 console.log("error: ", err);
@@ -121,10 +122,10 @@ Task.updateNewsByNewsCode = function updateNewsByNewsCode(data) {
     return new Promise(function (resolve, reject) {
         var str = " UPDATE tb_news "
             + " SET news_title = '" + data.news_title + "',"
-            + " news_date = '" + data.news_date + "',"
-            + " news_deciption = '" + data.news_deciption + "',"
+            + " news_description = '" + data.news_description + "',"
             + " news_detail = '" + data.news_detail + "',"
-            + " news_show = '" + data.news_show + "'"
+            + " news_show = '" + data.news_show + "',"
+            + " news_image_name = '" + data.news_image_name + "' "
             + " WHERE news_code = '" + data.news_code + "'";
 
         console.log("insertNews>>", str);

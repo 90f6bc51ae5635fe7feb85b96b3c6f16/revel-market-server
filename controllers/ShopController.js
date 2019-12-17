@@ -25,5 +25,9 @@ Task.deleteShopByShopCode = async function deleteShopByShopCode(data, result) {
     var response = await ShopModel.deleteShopByShopCode(data);
     result(response);
 }
+Task.getLastCode = async function getLastCode(data, result) {
+    var response = await ShopModel.getLastCode(data);
+    result(response);
+}
 
 module.exports = Task;

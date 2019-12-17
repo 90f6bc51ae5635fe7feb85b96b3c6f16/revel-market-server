@@ -7,6 +7,8 @@ var Task = function (task) {
 Task.getShopBy = function getShopBy() {
     return new Promise(function (resolve, reject) {
         var str = "SELECT * FROM tb_shop ";
+        console.log(str);
+
         sql.query(str, function (err, res) {
             if (err) {
                 console.log("error: ", err);
@@ -58,14 +60,16 @@ Task.getShopByShopCode = function getShopByShopCode(data) {
 }
 Task.insertShop = function insertShop(data, last_code) {
     return new Promise(function (resolve, reject) {
-        var str = "INSERT INTO tb_shop (shop_code, shop_name, shop_address, shop_tel, shop_detail, shop_latitude, shop_longitude)"
+        var str = "INSERT INTO tb_shop (shop_code, shop_name, shop_description,shop_address, shop_tel, shop_detail, shop_latitude, shop_longitude , shop_image_name)"
             + " VALUES ('" + last_code + "', "
             + " '" + data.shop_name + "', "
+            + " '" + data.shop_description + "', "
             + " '" + data.shop_address + "', "
             + " '" + data.shop_tel + "', "
             + " '" + data.shop_detail + "', "
             + " '" + data.shop_latitude + "', "
-            + " '" + data.shop_longitude + "') ";
+            + " '" + data.shop_longitude + "',"
+            + " '" + data.shop_image_name + "') ";
 
         console.log("insertShop>>", str);
         sql.query(str, function (err, res) {
@@ -96,11 +100,13 @@ Task.updateShopByShopCode = function updateShopByShopCode(data) {
     return new Promise(function (resolve, reject) {
         var str = " UPDATE tb_shop "
             + " SET shop_name = '" + data.shop_name + "',"
+            + " shop_description = '" + data.shop_description + "',"
             + " shop_address = '" + data.shop_address + "',"
             + " shop_tel = '" + data.shop_tel + "',"
             + " shop_detail = '" + data.shop_detail + "',"
             + " shop_latitude = '" + data.shop_latitude + "',"
-            + " shop_longitude = '" + data.shop_longitude + "'"
+            + " shop_longitude = '" + data.shop_longitude + "',"
+            + " shop_image_name = '" + data.shop_image_name + "'"
             + " WHERE shop_code = '" + data.shop_code + "'";
 
         console.log("insertShop>>", str);

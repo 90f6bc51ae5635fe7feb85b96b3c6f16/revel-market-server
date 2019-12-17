@@ -46,4 +46,13 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/shop/getLastCode', function (req, res) {
+        console.log('/shop/getLastCode', req.body)
+        ShopController.getLastCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
 }
