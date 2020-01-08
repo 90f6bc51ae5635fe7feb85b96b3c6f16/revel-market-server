@@ -4,10 +4,9 @@ var Task = function (task) {
     this.task = task.task;
 };
 
-Task.getShopBy = function getShopBy() {
+Task.getShopBy = function getShopBy(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT * FROM tb_shop ";
-        console.log(str);
+        var str = "SELECT * FROM tb_shop WHERE shop_name LIKE ('%" + data.keyword + "%') ";
 
         sql.query(str, function (err, res) {
             if (err) {
