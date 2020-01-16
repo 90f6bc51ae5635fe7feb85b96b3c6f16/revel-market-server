@@ -3,6 +3,7 @@ var ShopModel = require('../models/ShopModel');
 var Task = function (task) {
     this.task = task.task;
 };
+
 Task.getShopBy = async function getShopBy(data, result) {
     var shopList = await ShopModel.getShopBy(data);
     result(shopList);

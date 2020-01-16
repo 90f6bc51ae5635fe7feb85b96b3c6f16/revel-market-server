@@ -49,7 +49,7 @@ module.exports = function (app) {
                     data: { comment_photo_url: '' },
                     error: [{ message: 'Can not find photo upload.' }],
                     upload_result: false,
-                    server_result: true
+                    
                 };
                 res.send(require);
             } else {
@@ -58,7 +58,7 @@ module.exports = function (app) {
                     comment_photo_url: comment_photo_url ,
                     error: [{ message: 'Upload photo complete.' }],
                     upload_result: true,
-                    server_result: true
+                    
                 };
                 console.log('res', require);
                 res.send(require);
@@ -78,7 +78,7 @@ module.exports = function (app) {
                     data: { comment_photo_url: '' },
                     error: [{ message: 'Can not find photo delete.' }],
                     upload_result: false,
-                    server_result: true
+                    
                 };
                 res.send(require);
             } else {
@@ -86,7 +86,7 @@ module.exports = function (app) {
                     data: [],
                     error: [{ message: 'Delete photo complete.' }],
                     upload_result: true,
-                    server_result: true
+                    
                 };
                 console.log('res', require);
                 res.send(require);

@@ -3,6 +3,7 @@ var NewsModel = require('../models/NewsModel');
 var Task = function (task) {
     this.task = task.task;
 };
+
 Task.getNewsBy = async function getNewsBy(data, result) {
     var newsList = await NewsModel.getNewsBy(data);
     result(newsList);

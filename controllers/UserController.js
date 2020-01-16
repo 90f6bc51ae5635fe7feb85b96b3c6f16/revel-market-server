@@ -4,9 +4,8 @@ var Task = function (task) {
     this.task = task.task;
 };
 
-
-Task.checkLogin = async function checkLogin(data, result) {
-    var user = await UserModel.checkLogin(data);
+Task.getLogin = async function getLogin(data, result) {
+    var user = await UserModel.getLogin(data);
     result(user);
 }
 Task.getUserBy = async function getUserBy(data, result) {

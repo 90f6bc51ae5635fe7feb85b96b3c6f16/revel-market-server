@@ -4,62 +4,48 @@ var Task = function (task) {
     this.task = task.task;
 };
 
-
-Task.checkLogin = function checkLogin(data) {
+Task.getLogin = function getLogin(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT  * FROM `tb_user`  " 
-            +" WHERE user_username = " + sql.escape(data.user_username) + ""
-            + "AND user_password = " + sql.escape(data.user_password) + "";
-
-            console.log("query checkLogin = ",str);
+        var str = "SELECT * FROM tb_user " 
+            + " WHERE user_username = " + sql.escape(data.user_username) 
+            + " AND user_password = " + sql.escape(data.user_password);
             
         sql.query(str, function (err, res) {
             if (err) {
-                console.log("error: ", err);
                 const require = {
                     data: [],
                     error: err,
                     query_result: false,
-                    server_result: true
                 };
                 resolve(require);
-            }
-            else {
+            }else{
                 const require = {
                     data: res,
                     error: [],
                     query_result: true,
-                    server_result: true
                 };
                 resolve(require);
             }
         });
     });
 }
-
-
 Task.getUserBy = function getUserBy() {
     return new Promise(function (resolve, reject) {
         var str = "SELECT * FROM tb_user ";
-        console.log("str",str);
         
         sql.query(str, function (err, res) {
             if (err) {
-                console.log("error: ", err);
                 const require = {
                     data: [],
                     error: err,
                     query_result: false,
-                    server_result: true
                 };
                 resolve(require);
-            }
-            else {
+            }else{
                 const require = {
                     data: res,
                     error: [],
                     query_result: true,
-                    server_result: true
                 };
                 resolve(require);
             }
@@ -69,23 +55,20 @@ Task.getUserBy = function getUserBy() {
 Task.getUserByUserCode = function getUserByUserCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT * FROM tb_user WHERE user_code = '" + data.user_code + "' ";
+
         sql.query(str, function (err, res) {
             if (err) {
-                console.log("error: ", err);
                 const require = {
                     data: [],
                     error: err,
                     query_result: false,
-                    server_result: true
                 };
                 resolve(require);
-            }
-            else {
+            }else{
                 const require = {
                     data: res,
                     error: [],
                     query_result: true,
-                    server_result: true
                 };
                 resolve(require);
             }
@@ -105,31 +88,25 @@ Task.insertUser = function insertUser(data, last_code) {
             + " '" + data.user_email + "', "
             + " '" + data.user_image + "') ";
 
-        console.log("insertUser>>", str);
         sql.query(str, function (err, res) {
             if (err) {
-                console.log("error: ", err);
                 const require = {
                     data: [],
                     error: err,
                     query_result: false,
-                    server_result: true
                 };
                 resolve(require);
-            }
-            else {
+            }else{
                 const require = {
                     data: res,
                     error: [],
                     query_result: true,
-                    server_result: true
                 };
                 resolve(require);
             }
         });
     });
 }
-
 Task.updateUserByUserCode = function updateUserByUserCode(data) {
     return new Promise(function (resolve, reject) {
         var str = " UPDATE tb_user "
@@ -143,24 +120,19 @@ Task.updateUserByUserCode = function updateUserByUserCode(data) {
             + " user_image = '" + data.user_image + "'"
             + " WHERE user_code = '" + data.user_code + "'";
 
-        console.log("UpdateUser>>", str);
         sql.query(str, function (err, res) {
             if (err) {
-                console.log("error: ", err);
                 const require = {
                     data: [],
                     error: err,
                     query_result: false,
-                    server_result: true
                 };
                 resolve(require);
-            }
-            else {
+            }else{
                 const require = {
                     data: res,
                     error: [],
                     query_result: true,
-                    server_result: true
                 };
                 resolve(require);
             }
@@ -170,42 +142,38 @@ Task.updateUserByUserCode = function updateUserByUserCode(data) {
 Task.deleteUserByUserCode = function deleteUserByUserCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "DELETE FROM tb_user WHERE user_code = '" + data.user_code + "' ";
+
         sql.query(str, function (err, res) {
             if (err) {
-                console.log("error: ", err);
                 const require = {
                     data: [],
                     error: err,
                     query_result: false,
-                    server_result: true
                 };
                 resolve(require);
-            }
-            else {
+            }else{
                 const require = {
                     data: res,
                     error: [],
                     query_result: true,
-                    server_result: true
                 };
                 resolve(require);
             }
         });
     });
 }
-
 Task.getLastCode = function getLastCode() {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT  IFNULL(CONCAT('U',LPAD( SUBSTRING(max(user_code), 2, 5)+1,4,'0')), 'U0001')   AS last_code  FROM `tb_user`";
+        var str = "SELECT IFNULL(CONCAT('U',LPAD( SUBSTRING(max(user_code), 2, 5)+1,4,'0')), 'U0001') AS last_code  FROM tb_user ";
+
         sql.query(str, function (err, res) {
             if (err) {
-                console.log("error: ", err);
                 resolve(err);
-            }
-            else {
+            }else{
                 resolve(res[0].last_code);
             }
         });
     });
 }
+
 module.exports = Task;
