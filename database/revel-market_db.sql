@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 17, 2020 at 02:14 AM
+-- Generation Time: Jan 17, 2020 at 02:49 AM
 -- Server version: 5.7.17-log
 -- PHP Version: 5.6.30
 
@@ -96,7 +96,7 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`user_code`, `user_username`, `user_password`, `user_name`, `user_lastname`, `user_address`, `user_tel`, `user_email`, `user_image`) VALUES
-('U0001', 'admin', '123456', 'Maxky', 'Developer', 'ตำบลในเมือง อำเภอเมืองนครราชสีมา นครราชสีมา 30000', '0897199541', 'maxky_develop@rvscs.com', 'user/73318478_686940691799664_6226693206050865152_n.jpg');
+('U0001', 'admin', '123456', 'Revel', 'Developer', 'ตำบลในเมือง อำเภอเมืองนครราชสีมา นครราชสีมา 30000', '0987877899', 'support@revevlsoft.co.th', 'user/5f89a410-7d9e-455f-a56e-00e627792e7c.jpg');
 
 --
 -- Indexes for dumped tables
