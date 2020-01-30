@@ -6,10 +6,10 @@ var Task = function (task) {
 
 Task.getLogin = function getLogin(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT * FROM tb_user " 
-            + " WHERE user_username = " + sql.escape(data.user_username) 
+        var str = "SELECT * FROM tb_user "
+            + " WHERE user_username = " + sql.escape(data.user_username)
             + " AND user_password = " + sql.escape(data.user_password);
-            
+
         sql.query(str, function (err, res) {
             if (err) {
                 const require = {
@@ -18,7 +18,7 @@ Task.getLogin = function getLogin(data) {
                     query_result: false,
                 };
                 resolve(require);
-            }else{
+            } else {
                 const require = {
                     data: res,
                     error: [],
@@ -32,7 +32,7 @@ Task.getLogin = function getLogin(data) {
 Task.getUserBy = function getUserBy() {
     return new Promise(function (resolve, reject) {
         var str = "SELECT * FROM tb_user ";
-        
+
         sql.query(str, function (err, res) {
             if (err) {
                 const require = {
@@ -41,7 +41,7 @@ Task.getUserBy = function getUserBy() {
                     query_result: false,
                 };
                 resolve(require);
-            }else{
+            } else {
                 const require = {
                     data: res,
                     error: [],
@@ -64,7 +64,7 @@ Task.getUserByUserCode = function getUserByUserCode(data) {
                     query_result: false,
                 };
                 resolve(require);
-            }else{
+            } else {
                 const require = {
                     data: res,
                     error: [],
@@ -96,7 +96,7 @@ Task.insertUser = function insertUser(data, last_code) {
                     query_result: false,
                 };
                 resolve(require);
-            }else{
+            } else {
                 const require = {
                     data: res,
                     error: [],
@@ -128,7 +128,7 @@ Task.updateUserByUserCode = function updateUserByUserCode(data) {
                     query_result: false,
                 };
                 resolve(require);
-            }else{
+            } else {
                 const require = {
                     data: res,
                     error: [],
@@ -139,6 +139,32 @@ Task.updateUserByUserCode = function updateUserByUserCode(data) {
         });
     });
 }
+Task.updateImageNameByUserCode = function updateImageNameByUserCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = " UPDATE tb_user "
+            + " SET  user_image = '" + data.user_image + "'"
+            + " WHERE user_code = '" + data.user_code + "'";
+
+        sql.query(str, function (err, res) {
+            if (err) {
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                };
+                resolve(require);
+            } else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                };
+                resolve(require);
+            }
+        });
+    });
+}
+
 Task.deleteUserByUserCode = function deleteUserByUserCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "DELETE FROM tb_user WHERE user_code = '" + data.user_code + "' ";
@@ -151,7 +177,7 @@ Task.deleteUserByUserCode = function deleteUserByUserCode(data) {
                     query_result: false,
                 };
                 resolve(require);
-            }else{
+            } else {
                 const require = {
                     data: res,
                     error: [],
@@ -169,7 +195,7 @@ Task.getLastCode = function getLastCode() {
         sql.query(str, function (err, res) {
             if (err) {
                 resolve(err);
-            }else{
+            } else {
                 resolve(res[0].last_code);
             }
         });

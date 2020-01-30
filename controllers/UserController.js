@@ -26,6 +26,11 @@ Task.updateUserByUserCode = async function updateUserByUserCode(data, result) {
     var response = await UserModel.updateUserByUserCode(data);
     result(response);
 }
+Task.updateImageNameByUserCode = async function updateImageNameByUserCode(data, result) {
+    var response = await UserModel.updateImageNameByUserCode(data);
+    result(response);
+}
+
 Task.deleteUserByUserCode = async function deleteUserByUserCode(data, result) {
     var response = await UserModel.deleteUserByUserCode(data);
     result(response);

@@ -1,7 +1,6 @@
 var UserController = require('../controllers/UserController');
 
 module.exports = function (app) {
-
     app.post('/user/getLogin', function (req, res) {    //  Not Controller
         UserController.getLogin(req.body, function (err, task) {
             if (err) {
@@ -42,6 +41,16 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+
+    app.post('/user/updateImageNameByUserCode', function (req, res) {
+        UserController.updateImageNameByUserCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+
     app.post('/user/deleteUserByUserCode', function (req, res) {
         UserController.deleteUserByUserCode(req.body, function (err, task) {
             if (err) {
