@@ -16,12 +16,16 @@ Task.getUserByUserCode = async function getUserByUserCode(data, result) {
     var user = await UserModel.getUserByUserCode(data);
     result(user);
 }
-Task.insertUser = async function insertUser(data, result) {
-    var last_code = await UserModel.getLastCode();
-    var response = await UserModel.insertUser(data,last_code);
-    response.user_code = last_code;
-    result(response);
+Task.checkUsername = async function checkUsername(data, result) {
+    var user = await UserModel.checkUsername(data);
+    result(user);
 }
+// Task.insertUser = async function insertUser(data, result) {
+//     var last_code = await UserModel.getLastCode();
+//     var response = await UserModel.insertUser(data,last_code);
+//     response.user_code = last_code;
+//     result(response);
+// }
 Task.updateUserByUserCode = async function updateUserByUserCode(data, result) {
     var response = await UserModel.updateUserByUserCode(data);
     result(response);

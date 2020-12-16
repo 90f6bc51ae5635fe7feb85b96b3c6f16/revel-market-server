@@ -4,11 +4,9 @@ var Task = function (task) {
     this.task = task.task;
 };
 
-Task.getLogin = function getLogin(data) {
+Task.getProductBy = function getProductBy() {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT * FROM tb_user "
-            + " WHERE user_username = " + sql.escape(data.user_username)
-            + " AND user_password = " + sql.escape(data.user_password);
+        var str = "SELECT * FROM tb_product ";
 
         sql.query(str, function (err, res) {
             if (err) {
@@ -29,9 +27,9 @@ Task.getLogin = function getLogin(data) {
         });
     });
 }
-Task.getUserBy = function getUserBy() {
+Task.getProductShowBy = function getProductShowBy() {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT * FROM tb_user ";
+        var str = "SELECT * FROM tb_product WHERE product_show = 1 ";
 
         sql.query(str, function (err, res) {
             if (err) {
@@ -52,34 +50,9 @@ Task.getUserBy = function getUserBy() {
         });
     });
 }
-Task.getUserByUserCode = function getUserByUserCode(data) {
+Task.getProductByProductCode = function getProductByProductCode(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT * FROM tb_user "
-        +"LEFT JOIN tb_license ON tb_user.license_code = tb_license.license_code "
-        +"WHERE user_code = '" + data.user_code + "'";
-        sql.query(str, function (err, res) {
-            if (err) {
-                const require = {
-                    data: [],
-                    error: err,
-                    query_result: false,
-                };
-                resolve(require);
-            } else {
-                const require = {
-                    data: res,
-                    error: [],
-                    query_result: true,
-                };
-                resolve(require);
-            }
-        });
-    });
-}
-Task.checkUsername = function checkUsername(data) {
-    console.log(data)
-    return new Promise(function (resolve, reject) {
-        var str = "SELECT  * FROM tb_user WHERE user_username = " + sql.escape(data.user_username) + " ";
+        var str = "SELECT * FROM tb_product WHERE product_code = '" + data.product_code + "' ";
         console.log(str)
         sql.query(str, function (err, res) {
             if (err) {
@@ -100,28 +73,31 @@ Task.checkUsername = function checkUsername(data) {
         });
     });
 }
-Task.insertUser = async function insertUser(data) {
+Task.insertProduct = async function insertProduct(data) {
     const date = new Date()
-    const code = 'US' + date.getFullYear() + (date.getMonth() + 1) + date.getDate().toString().padStart(2, '0')
+    const code = 'PD' + date.getFullYear() + (date.getMonth() + 1) + date.getDate().toString().padStart(2, '0')
     const last_code = await this.getLastCode({ code: code, digit: 3, })
+
     return new Promise(function (resolve, reject) {
-        var str = "INSERT INTO tb_user (user_code,license_code,user_username, user_password,user_prefix, user_name, user_lastname, user_address, user_tel, user_email,user_position,user_status, user_image,addby, adddate)"
-            + " VALUES ('" + last_code + "', "
-            + " '" + data.license_code + "', "
-            + " '" + data.user_username + "', "
-            + " '" + data.user_password + "', "
-            + " '" + data.user_prefix + "', "
-            + " '" + data.user_name + "', "
-            + " '" + data.user_lastname + "', "
-            + " '" + data.user_address + "', "
-            + " '" + data.user_tel + "', "
-            + " '" + data.user_email + "', "
-            + " '" + data.user_position + "', "
-            + " '" + data.user_status + "', "
-            + " '" + data.user_image + "', "
-            + " '" + data.addby + "' ,"
-            + " NOW()"
+        var str = "INSERT INTO tb_product ("
+            + "product_code, "
+            + "product_name, "
+            + "product_type, "
+            + "product_brand, "
+            + "product_models,"
+            + "product_number,"
+            + "product_price,"
+            + "product_image"
+            + ") VALUES ('" + last_code + "', "
+            + " '" + data.product_name + "', "
+            + " '" + data.product_type + "', "
+            + " '" + data.product_brand + "', "
+            + " '" + data.product_models + "' ,"
+            + " '" + data.product_number + "' ,"
+            + " '" + data.product_price + "' ,"
+            + " '" + data.product_image + "'"
             + ") ";
+        console.log('str', str)
         sql.query(str, function (err, res) {
             if (err) {
                 const require = {
@@ -141,23 +117,19 @@ Task.insertUser = async function insertUser(data) {
         });
     });
 }
-Task.updateUserByUserCode = function updateUserByUserCode(data) {
+Task.updateProductByProductCode = function updateProductByProductCode(data) {
     return new Promise(function (resolve, reject) {
-        var str = " UPDATE tb_user "
-            + " SET user_username = '" + data.user_username + "',"
-            + " user_password = '" + data.user_password + "',"
-            + " user_prefix = '" + data.user_prefix + "',"
-            + " user_name = '" + data.user_name + "',"
-            + " user_lastname = '" + data.user_lastname + "',"
-            + " user_position = '" + data.user_position + "',"
-            + " user_status = '" + data.user_status + "',"
-            + " user_address = '" + data.user_address + "',"
-            + " user_tel = '" + data.user_tel + "',"
-            + " user_email = '" + data.user_email + "',"
-            + " user_image = '" + data.user_image + "',"
-            + " updateby = '" + data.updateby + "',"
-            + " lastupdate = " + " NOW() "
-            + " WHERE user_code = '" + data.user_code + "'";
+        var str = " UPDATE tb_product "
+            + " SET product_name = '" + data.product_name + "',"
+            // + " product_description = '" + data.product_description + "',"
+            + " product_type = '" + data.product_type + "',"
+            + " product_brand = '" + data.product_brand + "',"
+            + " product_models = '" + data.product_models + "',"
+            + " product_number = '" + data.product_number + "',"
+            + " product_price = '" + data.product_price + "',"
+            + " product_image = '" + data.product_image + "' "
+            + " WHERE product_code = '" + data.product_code + "'";
+        console.log(str)
         sql.query(str, function (err, res) {
             if (err) {
                 const require = {
@@ -177,12 +149,15 @@ Task.updateUserByUserCode = function updateUserByUserCode(data) {
         });
     });
 }
-Task.updateImageNameByUserCode = function updateImageNameByUserCode(data) {
+Task.updateProductNumberByproductCode = function updateProductNumberByproductCode(data) {
     return new Promise(function (resolve, reject) {
-        var str = " UPDATE tb_user "
-            + " SET  user_image = '" + data.user_image + "'"
-            + " WHERE user_code = '" + data.user_code + "'";
-
+        var str = " UPDATE tb_product "
+        // quantity=quantity - จำนวนที่ซื้อ where id = รหัสสินค้า
+            + " SET product_number = '" + (data.product_number - data.number )+ "'"
+            + " WHERE product_code = '" + data.product_code + "'";
+        console.log('product_number',str)
+        console.log('product_number',data.product_number)
+        console.log('product',data.number)
         sql.query(str, function (err, res) {
             if (err) {
                 const require = {
@@ -202,11 +177,15 @@ Task.updateImageNameByUserCode = function updateImageNameByUserCode(data) {
         });
     });
 }
-
-Task.deleteUserByUserCode = function deleteUserByUserCode(data) {
+// updateProductNumberByproductCodeAndUptate
+Task.updateProductNumberByproductCodeAndUptate = function updateProductNumberByproductCodeAndUptate(data) {
+    console.log(data)
     return new Promise(function (resolve, reject) {
-        var str = "DELETE FROM tb_user WHERE user_code = '" + data.user_code + "' ";
-
+        var str = " UPDATE tb_product "
+            + " SET product_number = '" + data.product_number + "'"
+            + " WHERE product_code = '" + data.product_code + "'";
+        console.log('product_number',str)
+        console.log('product_number',data.product_number)
         sql.query(str, function (err, res) {
             if (err) {
                 const require = {
@@ -226,25 +205,33 @@ Task.deleteUserByUserCode = function deleteUserByUserCode(data) {
         });
     });
 }
-Task.getLastCode = function getLastCode() {
+Task.deleteProductByProductCode = function deleteProductByProductCode(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT IFNULL(CONCAT('U',LPAD( SUBSTRING(max(user_code), 2, 5)+1,4,'0')), 'U0001') AS last_code  FROM tb_user ";
-
+        var str = "DELETE FROM tb_product WHERE product_code = '" + data.product_code + "' ";
         sql.query(str, function (err, res) {
             if (err) {
-                resolve(err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                };
+                resolve(require);
             } else {
-                resolve(res[0].last_code);
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                };
+                resolve(require);
             }
         });
     });
 }
 Task.getLastCode = function getLastCode(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT CONCAT('" + data.code + "',LPAD(IFNULL(MAX(CAST(SUBSTRING(user_code," + (data.code.length + 1) + "," + data.digit + ") AS SIGNED)),0) + 1," + data.digit + ",0)) AS last_code "
-            + "FROM tb_user "
-            + "WHERE user_code LIKE ('" + data.code + "%') "
-
+        var str = "SELECT CONCAT('" + data.code + "',LPAD(IFNULL(MAX(CAST(SUBSTRING(product_code," + (data.code.length + 1) + "," + data.digit + ") AS SIGNED)),0) + 1," + data.digit + ",0)) AS last_code "
+            + "FROM tb_product "
+            + "WHERE product_code LIKE ('" + data.code + "%') "
         sql.query(str, function (err, res) {
             if (err) {
                 resolve(err);

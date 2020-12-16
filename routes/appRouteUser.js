@@ -1,5 +1,5 @@
 var UserController = require('../controllers/UserController');
-
+var user_model = require('../models/UserModel');
 module.exports = function (app) {
     app.post('/user/getLogin', function (req, res) {    //  Not Controller
         UserController.getLogin(req.body, function (err, task) {
@@ -25,13 +25,17 @@ module.exports = function (app) {
             res.send(task);
         });
     })
-    app.post('/user/insertUser', function (req, res) {
-        UserController.insertUser(req.body, function (err, task) {
+    app.post('/user/checkUsername', function (req, res) {
+        UserController.checkUsername(req.body, function (err, task) {
             if (err) {
                 res.send(err);
             }
             res.send(task);
         });
+    })
+    app.post('/user/insertUser', async function (req, res) {
+        var result = await user_model.insertUser(req.body)
+        res.send(result)
     })
     app.post('/user/updateUserByUserCode', function (req, res) {
         UserController.updateUserByUserCode(req.body, function (err, task) {
