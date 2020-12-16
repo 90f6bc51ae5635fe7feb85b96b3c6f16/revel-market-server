@@ -31,26 +31,10 @@ app.listen(port, () => {
 
 var appRouteUpload = require('./routes/appRouteUpload');
 var appRouteUser = require('./routes/appRouteUser');
-var appRouteCustomer = require('./routes/appRouteCustomer');
-var appRouteMeeting = require('./routes/appRouteMeeting');
-var appRouteProject = require('./routes/appRouteProject');
-var appRouteProduct = require('./routes/appRouteProduct');
-var appRouteRentalitem = require('./routes/appRouteRentalitem');
-var appRouteProductret = require('./routes/appRouteProductret');
-var appRouteOverdue = require('./routes/appRouteOverdue');
-var appRouteLicense = require('./routes/appRoutesLicense');
-var appRouteLicensePermission = require('./routes/appRoutesLicensePermission');
-var appRouteManu = require('./routes/appRoutesManu');
+var appRouteShop = require('./routes/appRouteShop');
+var appRouteNews = require('./routes/appRouteNews');
 
 appRouteUpload(app); //upload the route
 appRouteUser(app);
-appRouteCustomer(app);
-appRouteMeeting(app);
-appRouteProject(app);
-appRouteProduct(app);
-appRouteRentalitem(app);
-appRouteProductret(app);
-appRouteOverdue(app);
-appRouteLicense(app);
-appRouteLicensePermission(app);
-appRouteManu(app);
+appRouteShop(app);
+appRouteNews(app);
